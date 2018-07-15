@@ -19,14 +19,13 @@ public class WorldChunk : MonoBehaviour {
     // Fractional width and height of the texture square in the atlas
     private float textureWidth = 0.083f;
     // The coordinates of the textures in the texture atlas
-    private Vector2 grassTop = new Vector2(1, 11);
-    private Vector2 grassSide = new Vector2(0, 10);
-    private Vector2 rock = new Vector2(7, 8);
+    private Vector2 lightGrid = new Vector2(1, 11);
+    
 
 
     public enum TextureType {
 
-        air, grass, rock
+        lightGrid
 
     }
 
@@ -36,7 +35,7 @@ public class WorldChunk : MonoBehaviour {
         mesh = GetComponent<MeshFilter>().mesh;
         chunkCollider = GetComponent<MeshCollider>();
 
-        CubeTop(0, 0, 0, (byte) TextureType.grass.GetHashCode());
+        CubeTop(0, 0, 0, (byte) TextureType.lightGrid.GetHashCode());
         UpdateMesh();
 	}
 	
@@ -63,7 +62,7 @@ public class WorldChunk : MonoBehaviour {
         newTriangles.Add(faceCount * 4 + 3); // Triangle 2
 
         Vector2 texturePosition;
-        texturePosition = grassTop;
+        texturePosition = lightGrid;
 
         // Add the coordinates of the four corners of the texture in the texture atlas
         newUV.Add(new Vector2(textureWidth * texturePosition.x + textureWidth, textureWidth * texturePosition.y)); // Bottom right
