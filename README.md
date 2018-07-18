@@ -1,6 +1,6 @@
 # Procedurally Generated Environments for VR Game Development
 
-Working Title: VirtuaCraft
+Working Title: VirtuaBlocks
 
 
 The goal of this project is to explore the use of procedural generation algorithms to
@@ -24,7 +24,11 @@ Possible Features:
 
 References:
 http://pcg.wikidot.com/pcg-games:minecraft
+
 https://en.wikipedia.org/wiki/Perlin_noise
+
 https://docs.unity3d.com/Manual/wmr_sdk_overview.html
+
 https://github.com/Microsoft/MixedRealityToolkit-Unity
+
 https://docs.microsoft.com/en-us/windows/mixed-reality/unity-development-overview

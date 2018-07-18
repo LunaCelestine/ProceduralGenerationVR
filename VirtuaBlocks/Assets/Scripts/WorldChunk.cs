@@ -36,6 +36,11 @@ public class WorldChunk : MonoBehaviour {
         chunkCollider = GetComponent<MeshCollider>();
 
         CubeTop(0, 0, 0, (byte) TextureType.lightGrid.GetHashCode());
+        CubeNorth(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
+        CubeEast(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
+        CubeSouth(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
+        CubeWest(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
+        CubeBottom(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
         UpdateMesh();
 	}
 	
@@ -52,6 +57,88 @@ public class WorldChunk : MonoBehaviour {
         newVertices.Add(new Vector3(x + 1, y, z));
         newVertices.Add(new Vector3(x, y, z));
 
+        Vector2 texturePosition;
+        texturePosition = lightGrid;
+
+        Cube(texturePosition);
+    }
+
+    void CubeNorth(int x, int y, int z, byte block)
+    {
+
+        // Add the vertices of the cubes top surface
+        newVertices.Add(new Vector3(x + 1, y - 1, z + 1));
+        newVertices.Add(new Vector3(x + 1, y, z + 1));
+        newVertices.Add(new Vector3(x, y, z + 1));
+        newVertices.Add(new Vector3(x, y - 1, z + 1));
+
+        Vector2 texturePosition;
+        texturePosition = lightGrid;
+
+        Cube(texturePosition);
+    }
+
+    void CubeEast(int x, int y, int z, byte block)
+    {
+
+        // Add the vertices of the cubes top surface
+        newVertices.Add(new Vector3(x + 1, y - 1, z));
+        newVertices.Add(new Vector3(x + 1, y, z));
+        newVertices.Add(new Vector3(x + 1, y, z + 1));
+        newVertices.Add(new Vector3(x + 1, y - 1, z + 1));
+
+        Vector2 texturePosition;
+        texturePosition = lightGrid;
+
+        Cube(texturePosition);
+    }
+
+    void CubeSouth(int x, int y, int z, byte block)
+    {
+
+        // Add the vertices of the cubes top surface
+        newVertices.Add(new Vector3(x, y - 1, z));
+        newVertices.Add(new Vector3(x, y, z));
+        newVertices.Add(new Vector3(x + 1, y, z));
+        newVertices.Add(new Vector3(x + 1, y - 1, z));
+
+        Vector2 texturePosition;
+        texturePosition = lightGrid;
+
+        Cube(texturePosition);
+    }
+
+    void CubeWest(int x, int y, int z, byte block)
+    {
+
+        // Add the vertices of the cubes top surface
+        newVertices.Add(new Vector3(x, y - 1, z + 1));
+        newVertices.Add(new Vector3(x, y, z + 1));
+        newVertices.Add(new Vector3(x, y, z));
+        newVertices.Add(new Vector3(x, y - 1, z));
+
+        Vector2 texturePosition;
+        texturePosition = lightGrid;
+
+        Cube(texturePosition);
+    }
+
+    void CubeBottom(int x, int y, int z, byte block)
+    {
+
+        // Add the vertices of the cubes top surface
+        newVertices.Add(new Vector3(x, y - 1, z));
+        newVertices.Add(new Vector3(x + 1, y - 1, z));
+        newVertices.Add(new Vector3(x + 1, y - 1, z + 1));
+        newVertices.Add(new Vector3(x, y - 1, z + 1));
+
+        Vector2 texturePosition;
+        texturePosition = lightGrid;
+
+        Cube(texturePosition);
+    }
+
+    void Cube(Vector2 texturePosition) {
         // Add the the six vectors of the two triangles that the surface is comprised of
         newTriangles.Add(faceCount * 4); // Triangle 1
         newTriangles.Add(faceCount * 4 + 1); // Triangle 1
@@ -61,15 +148,13 @@ public class WorldChunk : MonoBehaviour {
         newTriangles.Add(faceCount * 4 + 2); // Triangle 2
         newTriangles.Add(faceCount * 4 + 3); // Triangle 2
 
-        Vector2 texturePosition;
-        texturePosition = lightGrid;
-
         // Add the coordinates of the four corners of the texture in the texture atlas
         newUV.Add(new Vector2(textureWidth * texturePosition.x + textureWidth, textureWidth * texturePosition.y)); // Bottom right
         newUV.Add(new Vector2(textureWidth * texturePosition.x + textureWidth, textureWidth * texturePosition.y + textureWidth)); // Top right
         newUV.Add(new Vector2(textureWidth * texturePosition.x, textureWidth * texturePosition.y + textureWidth)); // Top left
         newUV.Add(new Vector2(textureWidth * texturePosition.x, textureWidth * texturePosition.y)); // Bottom left
 
+        faceCount++;
     }
 
     void UpdateMesh() {
