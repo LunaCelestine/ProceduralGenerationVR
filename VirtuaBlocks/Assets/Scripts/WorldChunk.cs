@@ -14,6 +14,11 @@ public class WorldChunk : MonoBehaviour {
     private Mesh mesh;
     private MeshCollider chunkCollider;
     private int faceCount;
+    private World world;
+
+    [SerializeField] GameObject worldObject;
+    [SerializeField] int worldChunkSize = 32;
+    
     
 
     // Fractional width and height of the texture square in the atlas
@@ -25,29 +30,70 @@ public class WorldChunk : MonoBehaviour {
 
     public enum TextureType {
 
-        lightGrid
+        air, lightGrid
 
     }
 
 
 	// Use this for initialization
 	void Start () {
+
+        world = worldObject.GetComponent("World") as World;
         mesh = GetComponent<MeshFilter>().mesh;
         chunkCollider = GetComponent<MeshCollider>();
 
-        CubeTop(0, 0, 0, (byte) TextureType.lightGrid.GetHashCode());
-        CubeNorth(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
-        CubeEast(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
-        CubeSouth(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
-        CubeWest(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
-        CubeBottom(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
-        UpdateMesh();
+        //CubeTop(0, 0, 0, (byte) TextureType.lightGrid.GetHashCode());
+        //CubeNorth(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
+        //CubeEast(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
+        //CubeSouth(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
+        //CubeWest(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
+        //CubeBottom(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
+        //UpdateMesh();
+        GenerateMesh();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    void GenerateMesh() {
+        for(int x = 0; x < worldChunkSize; x++) {
+            for(int y = 0; y < worldChunkSize; y++) {
+                for(int z = 0; z < worldChunkSize; z++) {
+                    if(world.Block(x, y, z) != (byte)WorldChunk.TextureType.air.GetHashCode()) {
+                        //Check if the surrounding cubes are air
+                        if(world.Block(x, y + 1, z) == (byte)WorldChunk.TextureType.air.GetHashCode()) {
+                            CubeTop(x, y, z, world.Block(x, y, z));
+                        }
+                        if (world.Block(x, y - 1, z) == (byte)WorldChunk.TextureType.air.GetHashCode())
+                        {
+                            CubeBottom(x, y, z, world.Block(x, y, z));
+                        }
+                        if (world.Block(x + 1, y, z) == (byte)WorldChunk.TextureType.air.GetHashCode())
+                        {
+                            CubeEast(x, y, z, world.Block(x, y, z));
+                        }
+                        if (world.Block(x - 1, y, z) == (byte)WorldChunk.TextureType.air.GetHashCode())
+                        {
+                            CubeWest(x, y, z, world.Block(x, y, z));
+                        }
+                        if (world.Block(x, y, z + 1) == (byte)WorldChunk.TextureType.air.GetHashCode())
+                        {
+                            CubeNorth(x, y, z, world.Block(x, y, z));
+                        }
+                        if (world.Block(x, y, z - 1) == (byte)WorldChunk.TextureType.air.GetHashCode())
+                        {
+                            CubeSouth(x, y, z, world.Block(x, y, z));
+                        }
+
+                    }
+                }
+
+            }
+        }
+        UpdateMesh();
+    }
 
     void CubeTop(int x, int y, int z, byte block) {
 
