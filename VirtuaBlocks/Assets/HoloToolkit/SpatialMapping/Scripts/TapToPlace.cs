@@ -38,7 +38,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         [Tooltip("Setting this to true will allow this behavior to control the DrawMesh property on the spatial mapping.")]
         public bool AllowMeshVisualizationControl = true;
 
-        [Tooltip("Should the center of the Collider be used instead of the gameObjects world transform.")]
+        [Tooltip("Should the center of the Collider be used instead of the gameObjects worldGO transform.")]
         public bool UseColliderCenter;
 
         private Interpolator interpolator;

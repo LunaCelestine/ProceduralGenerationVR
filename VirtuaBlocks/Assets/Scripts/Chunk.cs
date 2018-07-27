@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class WorldChunk : MonoBehaviour {
+
+public enum textureType {
+
+    air, lightGrid
+
+}
+
+public class Chunk : MonoBehaviour {
 
     // List of all vertices in the chunk
     private List<Vector3> newVertices = new List<Vector3>();
@@ -13,24 +20,67 @@ public class WorldChunk : MonoBehaviour {
 
     private Mesh mesh;
     private MeshCollider chunkCollider;
-    private int faceCount;
-    private World world;
-
-    [SerializeField] GameObject worldObject;
-    [SerializeField] int worldChunkSize = 32;
-    
-    
 
     // Fractional width and height of the texture square in the atlas
     private float textureWidth = 0.083f;
+    private int faceCount;
+    private int chunkSize;
+    private int chunkX;
+    private int chunkY;
+    private int chunkZ;
+    private World world;
+    private GameObject worldGO;
+
     // The coordinates of the textures in the texture atlas
     private Vector2 lightGrid = new Vector2(1, 11);
     
+    public int ChunkSize {
+        get
+        {
+            return chunkSize;
+        }
+        set
+        {
+            chunkSize = value;
+        }
+    }
 
+    public int ChunkX {
+        get {
+            return chunkX;
+        }
+        set {
+            chunkX = value;
+        }
+    }
 
-    public enum TextureType {
+    public int ChunkY
+    {
+        get {
+            return chunkY;
+        }
+        set {
+            chunkY = value;
+        }
+    }
 
-        air, lightGrid
+    public int ChunkZ
+    {
+        get {
+            return chunkZ;
+        }
+        set {
+            chunkZ = value;
+        }
+    }
+
+    public GameObject WorldGO {
+        get {
+            return worldGO;
+        }
+        set {
+            worldGO = value;
+        }
 
     }
 
@@ -38,7 +88,10 @@ public class WorldChunk : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        world = worldObject.GetComponent("World") as World;
+        world = WorldGO.GetComponent("World") as World;
+        //private GameObject obj = GameObject.Find("World");
+        //World = object.world;
+        //world = worldObject.GetComponent<World>() as World;
         mesh = GetComponent<MeshFilter>().mesh;
         chunkCollider = GetComponent<MeshCollider>();
 
@@ -58,33 +111,33 @@ public class WorldChunk : MonoBehaviour {
 	}
 
     void GenerateMesh() {
-        for(int x = 0; x < worldChunkSize; x++) {
-            for(int y = 0; y < worldChunkSize; y++) {
-                for(int z = 0; z < worldChunkSize; z++) {
-                    if(world.Block(x, y, z) != (byte)WorldChunk.TextureType.air.GetHashCode()) {
+        for(int x = 0; x < chunkSize; x++) {
+            for(int y = 0; y < chunkSize; y++) {
+                for(int z = 0; z < chunkSize; z++) {
+                    if(Block(x, y, z) != (byte)textureType.air.GetHashCode()) {
                         //Check if the surrounding cubes are air
-                        if(world.Block(x, y + 1, z) == (byte)WorldChunk.TextureType.air.GetHashCode()) {
-                            CubeTop(x, y, z, world.Block(x, y, z));
+                        if(Block(x, y + 1, z) == (byte)textureType.air.GetHashCode()) {
+                            CubeTop(x, y, z, Block(x, y, z));
                         }
-                        if (world.Block(x, y - 1, z) == (byte)WorldChunk.TextureType.air.GetHashCode())
+                        if (Block(x, y - 1, z) == (byte)textureType.air.GetHashCode())
                         {
-                            CubeBottom(x, y, z, world.Block(x, y, z));
+                            CubeBottom(x, y, z, Block(x, y, z));
                         }
-                        if (world.Block(x + 1, y, z) == (byte)WorldChunk.TextureType.air.GetHashCode())
+                        if (Block(x + 1, y, z) == (byte)textureType.air.GetHashCode())
                         {
-                            CubeEast(x, y, z, world.Block(x, y, z));
+                            CubeEast(x, y, z, Block(x, y, z));
                         }
-                        if (world.Block(x - 1, y, z) == (byte)WorldChunk.TextureType.air.GetHashCode())
+                        if (Block(x - 1, y, z) == (byte)textureType.air.GetHashCode())
                         {
-                            CubeWest(x, y, z, world.Block(x, y, z));
+                            CubeWest(x, y, z, Block(x, y, z));
                         }
-                        if (world.Block(x, y, z + 1) == (byte)WorldChunk.TextureType.air.GetHashCode())
+                        if (Block(x, y, z + 1) == (byte)textureType.air.GetHashCode())
                         {
-                            CubeNorth(x, y, z, world.Block(x, y, z));
+                            CubeNorth(x, y, z, Block(x, y, z));
                         }
-                        if (world.Block(x, y, z - 1) == (byte)WorldChunk.TextureType.air.GetHashCode())
+                        if (Block(x, y, z - 1) == (byte)textureType.air.GetHashCode())
                         {
-                            CubeSouth(x, y, z, world.Block(x, y, z));
+                            CubeSouth(x, y, z, Block(x, y, z));
                         }
 
                     }
@@ -203,6 +256,10 @@ public class WorldChunk : MonoBehaviour {
         faceCount++;
     }
 
+    byte Block(int x, int y, int z) {
+        return world.Block(x + chunkX, y + chunkY, z + chunkZ);
+    }
+
     void UpdateMesh() {
 
         
@@ -216,7 +273,7 @@ public class WorldChunk : MonoBehaviour {
         mesh.triangles = newTriangles.ToArray();
 
         // Optimize mesh for the gpu
-        MeshUtility.Optimize(mesh);
+        //MeshUtility.Optimize(mesh);
         mesh.RecalculateNormals();
 
         chunkCollider.sharedMesh = null;

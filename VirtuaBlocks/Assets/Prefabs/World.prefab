@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c9edc9d9616a444a6781ff53329e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDimension: 128
-  yDimension: 128
-  zDimension: 128
+  chunk: {fileID: 1668152369364530, guid: e67b6b5002c2fdb44be3e3d602fa28ad, type: 2}
+  xDimension: 64
+  yDimension: 64
+  zDimension: 64
+  chunkSize: 16

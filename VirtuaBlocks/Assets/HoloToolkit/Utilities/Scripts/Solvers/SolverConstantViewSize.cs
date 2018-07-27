@@ -22,10 +22,10 @@ namespace HoloToolkit.Unity
         [Tooltip("If the object is farther than MaxDistance, the distance used is clamped here")]
         public float MaxDistance = 3.5f;
 
-        [Tooltip("Minimum scale value possible (world space scale)")]
+        [Tooltip("Minimum scale value possible (worldGO space scale)")]
         public float MinScale = 0.01f;
 
-        [Tooltip("Maximum scale value possible (world space scale)")]
+        [Tooltip("Maximum scale value possible (worldGO space scale)")]
         public float MaxScale = 100f;
 
         [Tooltip("Used for dead zone for scaling")]

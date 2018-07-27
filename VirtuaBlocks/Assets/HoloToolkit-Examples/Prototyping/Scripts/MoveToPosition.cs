@@ -46,7 +46,7 @@ namespace HoloToolkit.Examples.Prototyping
         [Tooltip("Auto start? or status")]
         public bool IsRunning = false;
 
-        [Tooltip("use the local position instead of world position")]
+        [Tooltip("use the local position instead of worldGO position")]
         public bool ToLocalTransform = false;
 
         [Tooltip("animation is complete!")]

@@ -61,7 +61,7 @@ namespace HoloToolkit.Examples.InteractiveElements
         /// The amount we expect the user to drag from the origin point of the gesture.
         /// This value calculates the CurrentPercent, based on the gesture's CurrentDistance compared the MaxGestureDistance.
         /// </summary>
-        [Tooltip("The distance in world space to compare the gesture's delta to")]
+        [Tooltip("The distance in worldGO space to compare the gesture's delta to")]
         public float MaxGestureDistance = 0.15f;
         
         /// <summary>
