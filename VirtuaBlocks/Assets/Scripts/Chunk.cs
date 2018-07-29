@@ -156,8 +156,11 @@ public class Chunk : MonoBehaviour {
         newVertices.Add(new Vector3(x + 1, y, z));
         newVertices.Add(new Vector3(x, y, z));
 
-        Vector2 texturePosition;
-        texturePosition = lightGrid;
+        Vector2 texturePosition = new Vector2(0, 0);
+
+        if (block == (byte)textureType.lightGrid.GetHashCode()) {
+            texturePosition = lightGrid;
+        }
 
         Cube(texturePosition);
     }
@@ -171,8 +174,7 @@ public class Chunk : MonoBehaviour {
         newVertices.Add(new Vector3(x, y, z + 1));
         newVertices.Add(new Vector3(x, y - 1, z + 1));
 
-        Vector2 texturePosition;
-        texturePosition = lightGrid;
+        Vector2 texturePosition = SetSideTextures(x, y, z, block);
 
         Cube(texturePosition);
     }
@@ -186,8 +188,7 @@ public class Chunk : MonoBehaviour {
         newVertices.Add(new Vector3(x + 1, y, z + 1));
         newVertices.Add(new Vector3(x + 1, y - 1, z + 1));
 
-        Vector2 texturePosition;
-        texturePosition = lightGrid;
+        Vector2 texturePosition = SetSideTextures(x, y, z, block);
 
         Cube(texturePosition);
     }
@@ -201,8 +202,7 @@ public class Chunk : MonoBehaviour {
         newVertices.Add(new Vector3(x + 1, y, z));
         newVertices.Add(new Vector3(x + 1, y - 1, z));
 
-        Vector2 texturePosition;
-        texturePosition = lightGrid;
+        Vector2 texturePosition = SetSideTextures(x, y, z, block);
 
         Cube(texturePosition);
     }
@@ -216,8 +216,7 @@ public class Chunk : MonoBehaviour {
         newVertices.Add(new Vector3(x, y, z));
         newVertices.Add(new Vector3(x, y - 1, z));
 
-        Vector2 texturePosition;
-        texturePosition = lightGrid;
+        Vector2 texturePosition = SetSideTextures(x, y, z, block);
 
         Cube(texturePosition);
     }
@@ -231,10 +230,20 @@ public class Chunk : MonoBehaviour {
         newVertices.Add(new Vector3(x + 1, y - 1, z + 1));
         newVertices.Add(new Vector3(x, y - 1, z + 1));
 
-        Vector2 texturePosition;
-        texturePosition = lightGrid;
+        Vector2 texturePosition = SetSideTextures(x, y, z, block);
 
         Cube(texturePosition);
+    }
+
+    public Vector2 SetSideTextures(int x, int y, int z, byte block) {
+        //Sets the side textures according to the texture of CubeTop
+
+        Vector2 texturePosition = new Vector2(0, 0);
+        if(block == (byte)textureType.lightGrid.GetHashCode())
+        {
+            texturePosition = lightGrid;
+        }
+        return texturePosition;
     }
 
     void Cube(Vector2 texturePosition) {

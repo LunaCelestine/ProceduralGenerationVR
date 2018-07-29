@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Noise;
 
 
 public class World : MonoBehaviour {
@@ -21,11 +22,21 @@ public class World : MonoBehaviour {
 
         worldData = new byte[xDimension, yDimension, zDimension];
         for(int x = 0; x < xDimension; x++) {
-            for(int y = 0; y < yDimension; y++) {
-                for (int z = 0; z < zDimension; z++) {
-                    if (y <= 8) {
+            for (int z = 0; z < zDimension; z++) {
+                int grid = PerlinNoise(x, 0, z, 10f, 3f, 1.2f);
+                grid += PerlinNoise(x, 200, z, 20f, 8f, 0f) + 5;
+                for (int y = 0; y < yDimension; y++) {
+                    if(y >= grid) {
+                        worldData[x, y, z] = (byte)textureType.air.GetHashCode();
+                    }
+                    else if (y <= grid)
+                    {
                         worldData[x, y, z] = (byte)textureType.lightGrid.GetHashCode();
                     }
+                    
+                    //if (y <= 8) {
+                    //    worldData[x, y, z] = (byte)textureType.lightGrid.GetHashCode();
+                    //}
                 }
             }
         }
@@ -46,6 +57,16 @@ public class World : MonoBehaviour {
             }
         }
 	}
+
+    public int PerlinNoise(int x, int y, int z, float scale, float height, float power) {
+        float perlinValue;
+        perlinValue = Noise.Noise.GetNoise((double)x / scale, (double)y / scale, (double)z / scale);
+        perlinValue *= height;
+        if(power != 0) {
+            perlinValue = Mathf.Pow(perlinValue, power);
+        }
+        return (int)perlinValue;
+    }
 
     public byte Block(int x, int y, int z) {
         if(x >= xDimension || x < 0 || y >= yDimension || y < 0 || z >= zDimension || z < 0)
