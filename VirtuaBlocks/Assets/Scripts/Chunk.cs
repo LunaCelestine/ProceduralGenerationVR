@@ -35,12 +35,10 @@ public class Chunk : MonoBehaviour {
     private Vector2 lightGrid = new Vector2(1, 11);
     
     public int ChunkSize {
-        get
-        {
+        get {
             return chunkSize;
         }
-        set
-        {
+        set {
             chunkSize = value;
         }
     }
@@ -279,7 +277,7 @@ public class Chunk : MonoBehaviour {
         mesh.vertices = newVertices.ToArray();
         mesh.uv = newUV.ToArray();
         mesh.triangles = newTriangles.ToArray();
-        mesh.triangles = newTriangles.ToArray();
+        
 
         // Optimize mesh for the gpu
         //MeshUtility.Optimize(mesh);
