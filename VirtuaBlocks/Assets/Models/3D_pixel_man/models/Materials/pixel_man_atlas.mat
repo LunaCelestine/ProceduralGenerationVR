@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: virtuablocks_atlas
+  m_Name: pixel_man_atlas
   m_Shader: {fileID: 4800000, guid: d45c0efca53019e43891b0f610f8146e, type: 3}
   m_ShaderKeywords: _BORDER_LIGHT_USES_HOVER_COLOR _DIRECTIONAL_LIGHT _HOVER_LIGHT
-    _REFLECTIONS _SPECULAR_HIGHLIGHTS
-  m_LightmapFlags: 4
+    _SPECULAR_HIGHLIGHTS
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2000
@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b6ac38c44a4f61245855f74a23fba98f, type: 3}
+        m_Texture: {fileID: 2800000, guid: b46964a74ca9a4c2ab75753251e09f1f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -57,10 +57,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -104,7 +100,7 @@ Material:
     - _NearPlaneFade: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Reflections: 1
+    - _Reflections: 0
     - _Refraction: 0
     - _RefractiveIndex: 0
     - _RenderQueueOverride: -1
@@ -113,6 +109,7 @@ Material:
     - _RoundCornerMargin: 0
     - _RoundCornerRadius: 0.25
     - _RoundCorners: 0
+    - _Shininess: 0.078125
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

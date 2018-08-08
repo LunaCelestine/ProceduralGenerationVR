@@ -548,7 +548,8 @@ PlayerSettings:
   webGLLinkerTarget: 1
   scriptingDefineSymbols: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Metro: 2
   il2cppCompilerConfiguration: {}
   incrementalIl2cppBuild: {}
   allowUnsafeCode: 0
@@ -608,7 +609,7 @@ PlayerSettings:
       RemoteSystem: False
       RemovableStorage: False
       SharedUserCertificates: False
-      SpatialPerception: False
+      SpatialPerception: True
       SystemManagement: False
       UserAccountInformation: False
       UserDataTasks: False
