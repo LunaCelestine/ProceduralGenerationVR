@@ -1,8 +1,8 @@
 # Procedurally Generated Environments for VR Game Development
 
-#Working Title: VirtuaBlocks
+# Working Title: VirtuaBlocks
 
-##Overview
+## Overview
 The intent of this project is to explore the use of procedural generation algorithms to
 generate terrain maps for virtual reality game development. This project will consist of a game
 developed using the Unity game engine and will apply the Perlin Noise algorithm to generate
@@ -33,9 +33,9 @@ Not yet implemented:
 - AudioManager
 - GameManager
 
-##Development
+## Development
 
-####Terrain Generation
+#### Terrain Generation
 
 In this project, the terrain consists of a series of voxels, much like in MineCraft. A voxel is a series of 2-dimensional surfaces
 that used to represent a cube. The difference between rendering a cube as a opposed to voxel is that wit ha cube, all side of the cube
@@ -51,9 +51,9 @@ A detailed explanation of the algorithm can be found here:
 
 https://github.com/bdabdoub/PerlinNoise
 
-Terrain consists of a series of chunks, which are simply a square area of voxels. These chunks are implemented in the chunk.cs class.
-The games world object loops through all points in each chunk while calling the noise class to generate a Y value which represents the
-height at that point in the map. Each chunk checks to see what surfaces are surrounding in order to determine which surfaces are 
+The terrain consists of a series of chunks, which are simply a square area of voxels. These chunks are implemented in the chunk.cs class.
+The world object loops through all points in each chunk while calling the noise class to generate a Y value which represents the
+height in voxels at that point in the map. Each chunk checks to see what surfaces are surrounding in order to determine which surfaces are 
 to be rendered. 
 
 ![ProjectScreenshot](projectscreenshot.png?raw=true "Voxels")
@@ -65,10 +65,10 @@ Here it is with textures applied:
 
 ![TerrainWithTextures](texturedterrain.png?raw=true "Voxels")
 
-####WindowsMixedReality Integration
+#### WindowsMixedReality Integration
 
 
-In order to get the mixed reality working with this project, I follow the instructions found at these two links:
+In order to get the mixed reality working with this project, I followed the instructions found at these two links:
 
 https://docs.microsoft.com/en-us/windows/mixed-reality/unity-development-overview
 https://github.com/Microsoft/MixedRealityToolkit-Unity
@@ -76,12 +76,12 @@ https://github.com/Microsoft/MixedRealityToolkit-Unity
 Importing the mixed reality toolkit into the project gives you access to a number or examples and prefabs that 
 make working with WMR in Unity fairly simple. 
 
-The view of the headset is render seperately for each eye display as show below:
+The view of the headset is rendered separately for each eye display as show below:
 
 ![View](wmrview.png?raw=true "Voxels")
 
-The player can neavigate around the terrain using the motion controllers. In order to move forward, the player simply point to
-the location where they'd like to go and uses the joystick on the controller which shows a line leading to that spot. When released,
+The player can navigate around the terrain using the motion controllers. In order to move forward, the player simply point to
+the location where they'd like to go and uses the joystick on the controller which shows a line leading to that spot. When the joystick is released,
 the player teleports to that location.
 
 
@@ -89,7 +89,7 @@ the player teleports to that location.
 
 #### Future Updates
 
-In future updates the player will be able to create and destroy blcoks on the map in order to build structures. The player will also be able to jump using
+In future updates the player will be able to create and destroy blocks on the map in order to build structures. The player will also be able to jump using
 the buttons on the motion controllers. Alternate terrain generation algorithms might also be explored, including 3-dimensional noise algorithms.
 
 
