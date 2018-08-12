@@ -39,7 +39,7 @@ namespace HoloToolkit.Unity.Boundary
         //private TrackingSpaceType transparentTrackingSpaceType = TrackingSpaceType.Stationary;
         // Testing in the editor found that this moved the floor out of the way enough, and it is only
         // used in the case where a headset isn't attached. Otherwise, the floor is positioned like normal.
-        private readonly Vector3 floorPositionInEditor = new Vector3(0f, -3f, 0f);
+        private readonly Vector3 floorPositionInEditor = new Vector3(5f, 10f, -5f);
 
         [SerializeField]
         private bool renderFloor = true;
@@ -134,7 +134,7 @@ namespace HoloToolkit.Unity.Boundary
                 }
                 else
                 {
-                    floorQuadInstance.transform.position = Vector3.zero;
+                    floorQuadInstance.transform.position = new Vector3(5f, 10f, -5f);
                 }
 
                 SetFloorRendering();

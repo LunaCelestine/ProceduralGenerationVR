@@ -87,19 +87,10 @@ public class Chunk : MonoBehaviour {
 	void Start () {
 
         world = WorldGO.GetComponent("World") as World;
-        //private GameObject obj = GameObject.Find("World");
-        //World = object.world;
-        //world = worldObject.GetComponent<World>() as World;
         mesh = GetComponent<MeshFilter>().mesh;
         chunkCollider = GetComponent<MeshCollider>();
 
-        //CubeTop(0, 0, 0, (byte) TextureType.lightGrid.GetHashCode());
-        //CubeNorth(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
-        //CubeEast(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
-        //CubeSouth(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
-        //CubeWest(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
-        //CubeBottom(0, 0, 0, (byte)TextureType.lightGrid.GetHashCode());
-        //UpdateMesh();
+
         GenerateMesh();
 	}
 	

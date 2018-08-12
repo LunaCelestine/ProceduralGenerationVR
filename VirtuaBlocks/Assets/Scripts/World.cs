@@ -34,9 +34,6 @@ public class World : MonoBehaviour {
                         worldData[x, y, z] = (byte)textureType.lightGrid.GetHashCode();
                     }
                     
-                    //if (y <= 8) {
-                    //    worldData[x, y, z] = (byte)textureType.lightGrid.GetHashCode();
-                    //}
                 }
             }
         }

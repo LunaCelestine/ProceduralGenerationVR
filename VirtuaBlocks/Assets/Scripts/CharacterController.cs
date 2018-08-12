@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour {
 
+
+    // Unused script for not VR version
+
 	// Use this for initialization
 	void Start () {
 		

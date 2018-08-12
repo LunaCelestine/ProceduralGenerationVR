@@ -13,6 +13,8 @@ public class CameraFollow : MonoBehaviour {
     private float y = 0;
 
 
+    //This script is intended to be used with a non-vr version of the game
+
 	// Use this for initialization
 	void Start () {
 		
